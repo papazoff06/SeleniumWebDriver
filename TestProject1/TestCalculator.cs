@@ -1,8 +1,9 @@
+using System;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using NUnit.Framework;
-using System;
 
 namespace TestProject1
 {
@@ -16,11 +17,22 @@ namespace TestProject1
         IWebElement calcBtn;
         IWebElement resetBtn;
         IWebElement divResult;
+        ChromeOptions options;
 
         [OneTimeSetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver();
+            options = new ChromeOptions();
+            options.AddArgument("--headles");
+            options.AddArguments("headless");
+            options.AddArguments("no-sandbox");
+            options.AddArguments("disable-dev-shm-usage");
+            options.AddArguments("disable-gpu");
+            options.AddArguments("window-size=1920x1080");
+            options.AddArguments("disabl-extensions");
+            options.AddArguments("remote-debugging-port=9222");
+
+            driver = new ChromeDriver(options);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Url = "http://calculatorhtml.onrender.com";
 
