@@ -13,14 +13,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout the repository
+      uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 9.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - name: Test Projec1
+      run: dotnet test TestProject1 --no-build --verbosity normal
+    - name: Test Project2
+      run: dotnet test TestProject2 --no-build --verbosity normal
+    - name: Test Project3
+      run: dotnet test TestProject3 --no-build --verbosity normal
+      
